@@ -17,3 +17,4 @@
 * chessboard
 
   棋盘覆盖问题，很有意思，很能体现分治思想。
+* test work together
