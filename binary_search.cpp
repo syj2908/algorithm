@@ -9,7 +9,7 @@ int binary_search(int*, int, int);
 int main()
 {
     int array[] = {1, 3, 5, 7, 9};
-    int len = sizeof(array)/sizeof(int);
+    int len = sizeof(array) / sizeof(int);
     int index = binary_search(array, 9, len);
     cout << index << endl;
     return 0;
