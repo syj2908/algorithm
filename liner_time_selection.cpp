@@ -20,12 +20,6 @@ int select(int head, int tail, int key)
     //devide array into 5 numbers each piece, sort them
     //to find the third number, then move it to the array's
     //head
-
-    if (tail - head + 1 < 75)
-    {
-        sort(head, tail);
-        return array[head + key - 1];
-    }
     
     for (int i = 0; i <= (tail - head - 4) / 5; i++)
     {
@@ -75,8 +69,12 @@ int partition(int low, int high, int middle)
 
     //since v is the first number, i should be array[low+1]
 
-    int i = low+1, j = high;
-    int v = middle;
+    int i = low + 1, j = high, k;
+    for (k = low; k < high - low + 1;k++)
+        if(array[k]==middle)
+            break;
+    exchange(array[k], array[low]);
+    int v = array[low];
     while(1)
     {
         while(array[i]<v)
