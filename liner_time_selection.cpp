@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-int array[] = {9, 7, 5, 6, 4, 3, 8, 1, 2};
+int array[] = {9, 7, 5, 6, 4, 3, 8, 1, 2, 10, 11, 12, 13, 20, 19, 67, 52, 75, 44, 97, 42,99};
 
 int select(int, int, int);
 void sort(int, int);
@@ -10,7 +10,11 @@ void exchange(int, int);
 
 int main()
 {
-    int ans = select(0, 8, 3);
+    sort(0, 21);
+    for (int i = 0; i < 22; i++)
+        cout << array[i] << " ";
+    cout << endl;
+    int ans = select(0, 21, 20);
     cout << ans << endl;
     return 0;
 }
@@ -20,7 +24,11 @@ int select(int head, int tail, int key)
     //devide array into 5 numbers each piece, sort them
     //to find the third number, then move it to the array's
     //head
-    
+    if (tail - head + 1 <= 5)
+    {
+        sort(head, tail);
+        return array[head + key - 1];
+    }
     for (int i = 0; i <= (tail - head - 4) / 5; i++)
     {
         sort(head + 5 * i, head + 5 * i + 4);
@@ -29,7 +37,7 @@ int select(int head, int tail, int key)
 
     //find the middle-number of middle-numbers
 
-    int middle = select(head, head + (tail - head - 4) / 5, ((tail - head - 4) / 5 + 1) / 2);
+    int middle = select(head, head + (tail - head - 4) / 5, ((tail - head - 4) / 5 + 1) / 2 + 1);
     int mid_id = partition(head, tail, middle);
     int mid_rank = mid_id - head + 1;
 
@@ -44,15 +52,23 @@ int select(int head, int tail, int key)
     else
     {
         return select(mid_id + 1, tail, key - mid_rank);
+    }
+
+    if(key<=mid_rank)
+    {
+        return select(head, mid_id, key);
     }   
+    else
+    {
+        return select(mid_id + 1, tail, key - mid_rank);
+    }
 }
 
 void sort(int head, int tail)
 {
     //bubblesort
-
     for (int i = head; i < tail; i++)
-        for (int j = head; j < tail - head - i; j++)
+        for (int j = head; j < head+tail - i; j++)
             if (array[j] > array[j + 1])
             {
                 int temp = array[j];
