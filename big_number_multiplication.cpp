@@ -3,18 +3,19 @@
 #include<math.h>
 using namespace std;
 
-void big_number_multiplication(string, string, int);
+long long big_number_multiplication(string, string, int);
 
 int main()
 {
     string num1 = "12345678";
     string num2 = "87654321";
     int len = num1.length();
-    big_number_multiplication(num1, num2, len);
+    long long ans = big_number_multiplication(num1, num2, len);
+    cout << ans << endl;
     return 0;
 }
 
-void big_number_multiplication(string num1, string num2, int len)
+long long big_number_multiplication(string num1, string num2, int len)
 {
     int size = 0;
     string u1, u2, u3, v1, v2, v3;
@@ -52,13 +53,6 @@ void big_number_multiplication(string num1, string num2, int len)
     e = atoi(v2.c_str());
     f = atoi(v3.c_str());
 
-    cout << a << endl
-         << b << endl
-         << c << endl
-         << d << endl
-         << e << endl
-         << f << endl;
-
     m1 = a * d;
     m2 = c * f;
     m3 = (a + b + c) * (d + e + f);
@@ -72,16 +66,5 @@ void big_number_multiplication(string num1, string num2, int len)
     w5 = m2;
 
     ans = w1 * pow(10.0, 4.0 * size) + w2 * pow(10.0, 3.0 * size) + w3 * pow(10.0, 2.0 * size) + w4 * pow(10.0, size) + w5;
-    cout << m1 << endl
-         << m2 << endl
-         << m3 << endl
-         << m4 << endl
-         << m5;
-    cout << endl;
-    cout << w1 << endl
-         << w2 << endl
-         << w3 << endl
-         << w4 << endl
-         << w5 << endl;
-    cout << ans << endl;
+    return ans;
 }
