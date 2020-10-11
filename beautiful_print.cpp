@@ -4,8 +4,8 @@ using namespace std;
 void print(int n, int p[], int array[])
 {
     //漂亮地输出原数组
-    
-    int i = n, k=0;
+
+    int i = n, k = 0;
     int temp[n] = {0};
     while (p[i] - 1 > 0)
     {
@@ -30,6 +30,7 @@ void print(int n, int p[], int array[])
         }
         cout << array[i] << " ";
     }
+    cout << endl;
 }
 
 int getlen(int m, int n, int i, int j, int array[])
