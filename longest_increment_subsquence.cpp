@@ -27,6 +27,7 @@ int bin_search(int array[], int key, int len)
 int lis(int array[], int len)
 {
     int tail[len] = {0};
+    int ans[len] = {0};//longest_increment_subsquence
     tail[0] = array[0];
     int pos = 0;//proper posotion for array[i]
     int max = 1;//max len of lis
@@ -47,16 +48,22 @@ int lis(int array[], int len)
             pos = bin_search(tail, array[i], len);
             tail[pos] = array[i];
         }  
+        for (int i = 0; i < max; i++)
+            if(ans[i]==0)
+                ans[i] = tail[i];
     }
+    cout << "The longest increment subsquence is: ";
+    for (int i = 0; i < max; i++)
+        cout << ans[i] << " ";
+    cout << endl;
     return max;
 }
 
 int main()
 {
     int array[] = {2, 1, 5, 3, 6, 4, 8, 9, 7};
-    //int array[] = {3, 4, 7, 2, 5};
     int len = sizeof(array) / sizeof(int);
     int max = lis(array, len);
-    cout << max << endl;
+    cout << "The length of the LIS is " << max << endl;
     return 0;
 }
