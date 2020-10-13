@@ -45,12 +45,16 @@ int lis(int array[], int len)
         {
             //use binsearch to find a proper set for 
             //array[i]
-            pos = bin_search(tail, array[i], len);
+            pos = bin_search(tail, array[i], max);
             tail[pos] = array[i];
         }  
-        for (int i = 0; i < max; i++)
-            if(ans[i]==0)
+        if(ans[max-1]==0)
+        {
+            //the longest subsquence is modified
+            //refresh the whole ans[]
+            for (int i = 0; i < max; i++)
                 ans[i] = tail[i];
+        }
     }
     cout << "The longest increment subsquence is: ";
     for (int i = 0; i < max; i++)
@@ -61,7 +65,7 @@ int lis(int array[], int len)
 
 int main()
 {
-    int array[] = {2, 1, 5, 3, 6, 4, 8, 9, 7};
+    int array[] = {2, 10, 11, 21, 56, 3, 4, 5, 6, 7, 8, 9};
     int len = sizeof(array) / sizeof(int);
     int max = lis(array, len);
     cout << "The length of the LIS is " << max << endl;
