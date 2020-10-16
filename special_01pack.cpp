@@ -29,9 +29,9 @@ void greedyselect(int pack[][2], int n, int c)
         {
             //package is big enough to load
             sum_v += pack[min][1];
+            cout << min << " ";            
         }
         sum_w += pack[min][0];
-        cout << min << " ";
         pack[min][0] = 9999;//mark this item that it's already loaded
     }
     cout<<"\nThe max value is "<<sum_v<<endl;
