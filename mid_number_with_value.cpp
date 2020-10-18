@@ -2,40 +2,44 @@
 using namespace std;
 
 //int array[] = {9, 7, 5, 6, 4, 3, 8, 1, 2, 10, 11, 12, 13, 20, 19, 67, 52, 75, 44, 97, 42,99};
-int array[] = {256, 760, 591, 761, 621, 446, 774, 555, 342, 67};
-//int array[] = {256, 760, 591, 761, 621, 446, 774, 555, 342, 67};
-//int array[] = {67, 256, 342, 446, 555, 591, 621, 760, 761, 774};
-
+int num[] = {256, 760, 591, 761, 621, 446, 774, 555, 342, 67};
 double value[] = {0.1124, 0.0250, 0.1149, 0.1637, 0.1073, 0.0689, 0.1819, 0.1218, 0.0646, 0.0394};
+int array[10] = {0};
 
 int select(int, int, int);
 void sort(int, int);
 int partition(int, int, int);
 void exchange(int, int);
-int mid_number_with_value(int, int,double);
+int mid_number_with_value(int, int,int);
 
 int main()
 {
     int len = sizeof(array) / sizeof(int);
-    double sum = 0;
-    sort(0, len-1);
+    int sum = 0;
+    int array1[len] = {0};
     for (int i = 0; i < len; i++)
     {
+        array[i] = value[i] * 10000;
+        array1[i] = array[i];
         sum += array[i];
-        cout << array[i] << " ";
     }
-    cout << endl;
 
     int mid = mid_number_with_value(0, len - 1, sum);
-    cout << mid << endl;
-    return 0;
+    for (int i = 0; i < len;i++)
+    {
+        if (array1[i] == mid)
+        {
+            cout << num[i] << endl;
+            break;
+        }
+    }
+        return 0;
 }
 
-int mid_number_with_value(int head,int tail,double sum)
+int mid_number_with_value(int head,int tail,int sum)
 {
     int len = tail - head + 1;
     int mid = select(head, tail, len+1 / 2);
-    //cout << mid << endl;
     int l_sum = 0, r_sum = 0;
     int pos = 0;
     for (int i = 0; i < len; i++)
@@ -102,14 +106,14 @@ int select(int head, int tail, int key)
         return select(mid_id + 1, tail, key - mid_rank);
     }
 
-    if(key<=mid_rank)
-    {
-        return select(head, mid_id, key);
-    }   
-    else
-    {
-        return select(mid_id + 1, tail, key - mid_rank);
-    }
+//    if(key<=mid_rank)
+//    {
+//        return select(head, mid_id, key);
+//    }   
+//    else
+//    {
+//        return select(mid_id + 1, tail, key - mid_rank);
+//    }
 }
 
 void sort(int head, int tail)
