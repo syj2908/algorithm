@@ -1,7 +1,8 @@
 #include<iostream>
 using namespace std;
 
-int array[] = {9, 7, 5, 6, 4, 3, 8, 1, 2, 10, 11, 12, 13, 20, 19, 67, 52, 75, 44, 97, 42,99};
+//int array[] = {9, 7, 5, 6, 4, 3, 8, 1, 2, 10, 11, 12, 13, 20, 19, 67, 52, 75, 44, 97, 42,99};
+int array[] = {1, 2, 3};
 
 int select(int, int, int);
 void sort(int, int);
@@ -10,11 +11,12 @@ void exchange(int, int);
 
 int main()
 {
-    sort(0, 21);
-    for (int i = 0; i < 22; i++)
+    int len = sizeof(array) / sizeof(int);
+    sort(0, len-1);
+    for (int i = 0; i < len; i++)
         cout << array[i] << " ";
     cout << endl;
-    int ans = select(0, 21, 20);
+    int ans = select(0, len-1, 2);
     cout << ans << endl;
     return 0;
 }

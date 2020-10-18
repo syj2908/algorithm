@@ -1,18 +1,23 @@
 #include<iostream>
 using namespace std;
 
-int array[] = {9, 7, 5, 6, 4, 3, 8, 1, 2, 10, 11, 12, 13, 20, 19, 67, 52, 75, 44, 97, 42,99};
+//int array[] = {9, 7, 5, 6, 4, 3, 8, 1, 2, 10, 11, 12, 13, 20, 19, 67, 52, 75, 44, 97, 42,99};
+int array[] = {256, 760, 591, 761, 621, 446, 774, 555, 342, 67};
+//int array[] = {256, 760, 591, 761, 621, 446, 774, 555, 342, 67};
+//int array[] = {67, 256, 342, 446, 555, 591, 621, 760, 761, 774};
+
+double value[] = {0.1124, 0.0250, 0.1149, 0.1637, 0.1073, 0.0689, 0.1819, 0.1218, 0.0646, 0.0394};
 
 int select(int, int, int);
 void sort(int, int);
 int partition(int, int, int);
 void exchange(int, int);
-int mid_number_with_value(int, int,int);
+int mid_number_with_value(int, int,double);
 
 int main()
 {
     int len = sizeof(array) / sizeof(int);
-    int sum = 0;
+    double sum = 0;
     sort(0, len-1);
     for (int i = 0; i < len; i++)
     {
@@ -26,10 +31,11 @@ int main()
     return 0;
 }
 
-int mid_number_with_value(int head,int tail,int sum)
+int mid_number_with_value(int head,int tail,double sum)
 {
     int len = tail - head + 1;
-    int mid = select(head, tail, len / 2);
+    int mid = select(head, tail, len+1 / 2);
+    //cout << mid << endl;
     int l_sum = 0, r_sum = 0;
     int pos = 0;
     for (int i = 0; i < len; i++)
@@ -52,12 +58,12 @@ int mid_number_with_value(int head,int tail,int sum)
     else if (l_sum > r_sum)
     {
         array[pos] += r_sum;
-        return mid_number_with_value(head, pos, sum);
+        return mid_number_with_value(head, pos-1, sum);
     }
     else
     {
         array[pos] += l_sum;
-        return mid_number_with_value(pos, tail, sum);
+        return mid_number_with_value(pos+1, tail, sum);
     }
 }
 
