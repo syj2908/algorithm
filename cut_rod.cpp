@@ -15,7 +15,6 @@ void sort(int head, int tail,int pos[])
             }
 }
 
-
 void cut_rod(int L, int n, int pos[])
 {
     sort(0, n - 1, pos);
@@ -23,10 +22,6 @@ void cut_rod(int L, int n, int pos[])
         pos[i] = pos[i - 1];
     pos[0] = 0;
     pos[n+1] = L;
-
-//    for (int i = 0; i < n + 2;i++)
-//        cout << pos[i] << " ";
-//    cout << endl;
 
     int prize[500][500] = {0};
     for (int i = 0; i < n + 2;i++)
@@ -52,15 +47,6 @@ void cut_rod(int L, int n, int pos[])
         }
     }
 
-//    for (int i = 0; i < n + 2;i++)
-//    {
-//        for (int j = 0; j < n + 2;j++)
-//            cout << prize[i][j] << " ";
-//        cout << endl;
-//    }
-//    cout << endl;
-//    cout << endl;
-
     for (int i = 3; i < n + 2; i++)
     {
         for (int j = 0; j < n+2-i; j++)
@@ -72,13 +58,6 @@ void cut_rod(int L, int n, int pos[])
         prize[j][i+j] = min;
         }
     }
-
-//    for (int i = 0; i < n + 2;i++)
-//    {
-//        for (int j = 0; j < n + 2;j++)
-//            cout << prize[i][j] << " ";
-//        cout << endl;
-//    }
     cout << prize[0][n + 1] << endl;
 }
 
@@ -90,4 +69,5 @@ int main()
     for (int i = 0; i < n;i++)
         cin >> pos[i];
     cut_rod(L, n, pos);
+    return 0;
 }
