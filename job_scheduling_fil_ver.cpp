@@ -70,11 +70,7 @@ void job_scheduling(int n,int m,int t[])
     }
 /*     for (int i = 0; i < n;i++)
     {
-        for (int j = 0; j < m;j++)
-        {
-            cout << job_tab[i][j] << " ";
-        }
-        cout << endl;
+            cout << job_tab[i] << " ";
     } */
     cout << sum_wait << endl;
 }
