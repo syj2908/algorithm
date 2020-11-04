@@ -6,7 +6,45 @@ int a[1001][21] = {0};//样本矩阵
 int x[21] = {0};//当前解，0表示不选，1表示在a集合，2表示在b集合
 int bestx[21] = {0};//最优解
 int cmax = 0;//当前解
-int maxnum = 0;//最优值 注意解完一次矩阵要初始化！！！
+int maxnum = 0;//最优值 
+
+void update()
+{
+    for (int i = 1; i <= 20;i++)
+        bestx[i] = x[i];
+}
+
+int getsum(int arr[])
+{
+    int sum = 0;
+    for (int i = 1; i <= 20;i++)
+        if(arr[i]==1)
+            sum += i-1;
+    return sum;
+}
+
+int getnum(int arr[])
+{
+    int num = 0;
+    for (int i = 1; i <= 20;i++)
+        if(arr[i]==1)
+            num++;
+    return num;
+}
+
+int getabs(int arr[])
+{
+    int tempa = 0;
+    int tempb = 0;
+    for (int i = 1; i <= 20;i++)
+    {
+        if(arr[i]==1)
+            tempa++;
+        else if(arr[i]==2)
+            tempb++;
+    }
+    return tempa - tempb >= 0 ? tempa - tempb : tempb - tempa;
+}
 
 bool not_null()
 {
@@ -48,6 +86,7 @@ void merge(int t,int op)
     }
     else
     {
+        //加到b组
         x[t] = 2;
     } 
 }
@@ -111,40 +150,57 @@ void backtrack(int t)
     {
         //20列全部判断完毕,选择更新最优解
         cmax = getcmax();
-        if(cmax>maxnum&&not_null())
+        if (cmax > maxnum && not_null())
         {
-            for (int i = 1; i <= 20;i++)
-                bestx[i] = x[i];
+            update();
             maxnum = cmax;
-
-/*             cout <<"***"<< endl;
-            cout << "maxnum= " << maxnum << endl;
-            cout << "cmax= " << cmax << endl; */
-/*             cout << "x= ";
-            for (int i = 1; i <= 20;i++)
-                cout << x[i] << " ";
-            cout << endl; */
-/*             cout << "bestx= ";
-            for (int i = 1; i <= 20;i++)
-                cout << bestx[i] << " ";
-            cout << endl;
-            cout <<"***"<< endl; */
         }
+        else if(cmax == maxnum && not_null())
+        {
+            //按照输出规则选择更新最优解
+
+            //首先取ab集合元素个数相差最小的最优解
+            int a = getabs(x);
+            int b = getabs(bestx);
+            if(a<b)
+            {
+                //新最优解元素相差个数更少，更新
+                update();
+            }
+            else if(a==b)
+            {
+                int numa_new = getnum(x);
+                int numa_old = getnum(bestx);
+                if (numa_new > numa_old)
+                {
+                    //新最优解中A的元素个数更多
+                    update();
+                }
+                else if(numa_new==numa_old)
+                {
+                    int suma_new = getsum(x);
+                    int suma_old = getsum(bestx);
+                    if(suma_new<suma_old)
+                    {
+                        update();
+                    }
+                }
+            }
+        }    
     }
     else
     {
         //还在遍历中
         for (int i = 0; i <= 2;i++)
         {
-            //cout << "t= " << t << " op= " << i << endl;
             x[t] = i;
-            if (not_collide(t, i) && getcmax() + 21 - t > maxnum)
+            if (not_collide(t, i) && getcmax() + 20 - t >= maxnum)
             {
                 //新选择的列没有和原集合冲突，则把他加进来
                 merge(t,i);
                 backtrack(t + 1);
-                x[t] = 0;
-            }     
+            }
+            x[t] = 0;
         }
     }   
 }
@@ -160,11 +216,27 @@ int main()
                 cin >> a[i][j];
             }
         backtrack(1);
-        cout << maxnum << endl;
-        cout << "bestx= ";
+
+        //输出
         for (int i = 1; i <= 20;i++)
-            cout << bestx[i] << " ";
+        {
+            if(bestx[i]==1)
+            cout << i-1 << " ";
+        }
         cout << endl;
+        for (int i = 1; i <= 20;i++)
+        {
+            if(bestx[i]==2)
+            cout << i-1 << " ";
+        }
+        cout << endl;
+        
+        //初始化
+        for (int i = 1; i <= 20;i++)
+        {
+            x[i] = 0;
+            bestx[i] = 0;
+        }
         maxnum = 0;
         cmax = 0;
     }
