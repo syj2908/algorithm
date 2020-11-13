@@ -1,8 +1,8 @@
 #include<iostream>
 using namespace std;
 
-//int array[] = {9, 7, 5, 6, 4, 3, 8, 1, 2, 10, 11, 12, 13, 20, 19, 67, 52, 75, 44, 97, 42,99};
-int array[] = {1, 2, 3};
+int array[] = {9, 7, 5, 6, 4, 3, 8, 1, 2, 10, 11, 12, 13, 20, 19, 67, 52, 75, 44, 97, 42,99};
+//int array[] = {1, 2, 3};
 
 int select(int, int, int);
 void sort(int, int);
@@ -16,7 +16,7 @@ int main()
     for (int i = 0; i < len; i++)
         cout << array[i] << " ";
     cout << endl;
-    int ans = select(0, len-1, 2);
+    int ans = select(0, len-1, 16);
     cout << ans << endl;
     return 0;
 }
@@ -51,15 +51,6 @@ int select(int head, int tail, int key)
     {
         return select(head, mid_id, key);
     }
-    else
-    {
-        return select(mid_id + 1, tail, key - mid_rank);
-    }
-
-    if(key<=mid_rank)
-    {
-        return select(head, mid_id, key);
-    }   
     else
     {
         return select(mid_id + 1, tail, key - mid_rank);
