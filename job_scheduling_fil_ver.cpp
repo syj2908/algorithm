@@ -6,6 +6,7 @@ using namespace std;
 int get_shortest(int n, bool flag[],int t[])
 {
     //get job which is shortest&&not scheduled
+
     int shortest = INF;
     int p = 0;
     for (int i = 0; i < n;i++)
@@ -22,17 +23,19 @@ int get_shortest(int n, bool flag[],int t[])
 void job_scheduling(int n,int m,int t[])
 {
     int shortest = 0;
-    int sum_wait = 0;
-    int job_tab[n]={0};
-    int wait_time[m+1] = {0};
-    bool flag[n];
-    bool all_done = false;
+    int sum_wait = 0;//所有作业等待时间之和
+    int job_tab[n]={0};//job_tab[i]=u表示第i个作业被分配给了第u个机器
+    int wait_time[m+1] = {0};//wait_time[i]=t表示当一个作业被放到第i个机器上处理时，该作业从0时刻开始已等待了t时间
+    bool flag[n];//记录某一作业是否已被调度
+    bool all_done = false;//记录所有作业是否都被调度了 初始值未false
 
     for (int i = 0; i < n;i++)
         flag[i] = false;//all job is NOT scheduled
     
     while (!all_done)
     {
+        //还有作业没被调度
+        
         shortest = get_shortest(n, flag, t);
         for (int i = 1; i <= m;i++)
         {
@@ -55,9 +58,15 @@ void job_scheduling(int n,int m,int t[])
                 min_time = wait_time[i];
             }
         }
+        
+        //将作业分配到wait_time最小的机器上运行
+        
         job_tab[shortest] = p;
         sum_wait += min_time;
         flag[shortest] = true;
+        
+        //检测是否全部作业都已调度
+        
         all_done = true;
         for (int i = 0; i < n; i++)
         {
@@ -68,10 +77,6 @@ void job_scheduling(int n,int m,int t[])
             }
         }
     }
-/*     for (int i = 0; i < n;i++)
-    {
-            cout << job_tab[i] << " ";
-    } */
     cout << sum_wait << endl;
 }
 

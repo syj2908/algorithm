@@ -1,10 +1,11 @@
 #include<iostream>
+#include<stdio.h>
 using namespace std;
 
-//int array[] = {9, 7, 5, 6, 4, 3, 8, 1, 2, 10, 11, 12, 13, 20, 19, 67, 52, 75, 44, 97, 42,99};
-int num[] = {256, 760, 591, 761, 621, 446, 774, 555, 342, 67};
-double value[] = {0.1124, 0.0250, 0.1149, 0.1637, 0.1073, 0.0689, 0.1819, 0.1218, 0.0646, 0.0394};
-int array[10] = {0};
+int num[100000] = {0};
+double value[100000] = {0};
+int array[100000] = {0};
+int array1[100000] = {0};
 
 int select(int, int, int);
 void sort(int, int);
@@ -14,25 +15,34 @@ int mid_number_with_value(int, int,int);
 
 int main()
 {
-    int len = sizeof(array) / sizeof(int);
-    int sum = 0;
-    int array1[len] = {0};
-    for (int i = 0; i < len; i++)
+    int len;
+    freopen("D:\\Algorithm\\algorithm\\exp1_in.txt", "r", stdin);
+    while(cin>>len)
     {
-        array[i] = value[i] * 10000;
-        array1[i] = array[i];
-        sum += array[i];
-    }
+        int sum = 0;
+        for (int i = 0; i < len;i++)
+            cin >> num[i];
+        for (int i = 0; i < len;i++)
+            cin >> value[i];
 
-    int mid = mid_number_with_value(0, len - 1, sum);
-    for (int i = 0; i < len;i++)
-    {
-        if (array1[i] == mid)
+        for (int i = 0; i < len; i++)
         {
-            cout << num[i] << endl;
-            break;
+            array[i] = value[i] * 10000;
+            array1[i] = array[i];
+            sum += array[i];
+        }
+
+        int mid = mid_number_with_value(0, len - 1, sum);
+        for (int i = 0; i < len;i++)
+        {
+            if (array1[i] == mid)
+            {
+                cout << num[i] << endl;
+                break;
+            }
         }
     }
+    
         return 0;
 }
 

@@ -10,12 +10,16 @@ int maxnum = 0;//最优值
 
 void update()
 {
+    //更新最优解
+    
     for (int i = 1; i <= 20;i++)
         bestx[i] = x[i];
 }
 
 int getsum(int arr[])
 {
+    //计算A集合中元素和
+    
     int sum = 0;
     for (int i = 1; i <= 20;i++)
         if(arr[i]==1)
@@ -25,6 +29,8 @@ int getsum(int arr[])
 
 int getnum(int arr[])
 {
+    //计算A集合中元素个数
+    
     int num = 0;
     for (int i = 1; i <= 20;i++)
         if(arr[i]==1)
@@ -34,6 +40,8 @@ int getnum(int arr[])
 
 int getabs(int arr[])
 {
+    //计算AB集合元素个数差值的绝对值
+    
     int tempa = 0;
     int tempb = 0;
     for (int i = 1; i <= 20;i++)
@@ -48,6 +56,8 @@ int getabs(int arr[])
 
 bool not_null()
 {
+    //判断是否AB集合均非空
+    
     bool flag_a=false;
     bool flag_b=false;
     for (int i = 1; i <= 20;i++)
@@ -64,6 +74,8 @@ bool not_null()
 
 int getcmax()
 {
+    //计算当前加入AB集合的元素个数
+    
     int temp = 0;
     for (int i = 1; i <= 20;i++)
         if(x[i]==1||x[i]==2)
@@ -74,6 +86,7 @@ int getcmax()
 void merge(int t,int op)
 {
     //把待选列加到当前解中
+    
     if(op==0)
     {
         //不选 直接返回
@@ -146,6 +159,8 @@ bool not_collide(int t,int op)
 
 void backtrack(int t)
 {
+    //递归搜索每一节点
+    
     if(t>20)
     {
         //20列全部判断完毕,选择更新最优解
@@ -218,6 +233,7 @@ int main()
         backtrack(1);
 
         //输出
+        
         for (int i = 1; i <= 20;i++)
         {
             if(bestx[i]==1)
@@ -231,7 +247,8 @@ int main()
         }
         cout << endl;
         
-        //初始化
+        //初始化全局变量
+        
         for (int i = 1; i <= 20;i++)
         {
             x[i] = 0;

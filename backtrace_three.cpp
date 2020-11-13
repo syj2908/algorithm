@@ -10,12 +10,16 @@ int maxnum = 0;//最优值
 
 void update()
 {
+    //更新最优解
+
     for (int i = 1; i <= 20;i++)
         bestx[i] = x[i];
 }
 
 int getsum(int flag, int arr[])
 {
+    //计算flag对应集合里的元素和（flag=1/2/3对应集合A/B/C）
+
     int sum = 0;
     for (int i = 1; i <= 20;i++)
         if(arr[i]==flag)
@@ -25,6 +29,8 @@ int getsum(int flag, int arr[])
 
 int getabs(int arr[])
 {
+    //计算AB集合元素个数差的绝对值+BC集合元素个数差的绝对值
+
     int tempa = 0;
     int tempb = 0;
     int tempc = 0;
@@ -44,6 +50,8 @@ int getabs(int arr[])
 
 bool not_null()
 {
+    //判断ABC集合是否都非空
+
     bool flag_a = false;
     bool flag_b = false;
     bool flag_c = false;
@@ -63,6 +71,8 @@ bool not_null()
 
 int getcmax()
 {
+    //计算当前在集合中的元素个数
+
     int temp = 0;
     for (int i = 1; i <= 20;i++)
         if(x[i]==1||x[i]==2||x[i]==3)
@@ -73,6 +83,7 @@ int getcmax()
 void merge(int t,int op)
 {
     //把待选列加到当前解中
+
     if(op==0)
     {
         //不选 直接返回
@@ -171,6 +182,7 @@ bool not_collide(int t,int op)
 
 void backtrack(int t)
 {
+    //递归搜索每个节点
     if(t>20)
     {
         //20列全部判断完毕,选择更新最优解
@@ -273,7 +285,7 @@ int main()
         }
         cout << endl;
         
-        //初始化
+        //初始化全局变量
         for (int i = 1; i <= 20;i++)
         {
             x[i] = 0;
