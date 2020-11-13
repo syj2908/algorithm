@@ -21,7 +21,7 @@ void quick_sort(int array[], int low, int high)
         return;
     int j = partition(array, low, high);
 
-    //devide-and-conquer
+    //divide-and-conquer
 
     quick_sort(array, low, j - 1);
     quick_sort(array, j + 1, high);
